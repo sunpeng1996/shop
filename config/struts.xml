@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- spring与Struts2整合的作用：spring来管理action，实现action与service的解耦
+			1.添加整合jar包，功能：替换默认创建action的工厂类org.apache.struts2.spring.StrutsSpringObjectFactory.class
+				此类创建action是从spring容器中的
+			2.添加监听器，需要spring-web.jar，监听器用来加载spring配置文件，并且把spring配置文件
+				存储到application内置对象中
+				默认会在web-inf/application.xml，如果要改变位置，要配置参数contextConfigLocation
+			3.	修改action的class属性，与spring中配置的action id 相同
+	 -->
+	<!-- 配置为开发模式,这样修改的Struts的配置文件,不需要重启容器,发布的时候设置为false 
+	     Struts的常量配置,都在struts-core-2.3.4jar org.apache.struts2: default.properties中
+	-->
+	<constant name="struts.devMode" value="true" />
+	<!-- 所有的包都必须继承struts-default,里面设置了拦截器,和缺省拦截器  
+		 在struts-core-2.3.4jar 包下面的struts-default.xml中有详细介绍
+	-->
+	<package name="shop" extends="struts-default">
+		<!-- action配置在此处 -->
+		<action name="testAction_*" class="testAction" method="{1}">
+				<result name="success">/success.jsp</result>
+		</action>
+	</package>
+		
+</struts>    
