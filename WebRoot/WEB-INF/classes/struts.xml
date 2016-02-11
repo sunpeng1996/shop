@@ -31,6 +31,10 @@
 					
 			</action>
 			
+			<action name="goodsAction_*" class="goodsAction" method="{1}">
+					
+			</action>
+			
 	</package>
 		
 </struts>    

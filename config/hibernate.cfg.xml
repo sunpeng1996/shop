@@ -27,6 +27,7 @@
 	<property name="show_sql">true</property>
 	<mapping resource="cn/itcast/shop/pojo/Account.hbm.xml" />
 	<mapping resource="cn/itcast/shop/pojo/Category.hbm.xml" />
+	<mapping resource="cn/itcast/shop/pojo/Goods.hbm.xml" />
 
 </session-factory>
 

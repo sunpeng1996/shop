@@ -9,6 +9,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import cn.itcast.shop.service.AccountService;
 import cn.itcast.shop.service.CategoryService;
+import cn.itcast.shop.service.impl.GoodsService;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -37,6 +38,12 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>,Reque
 		
 	public void setCategoryService(CategoryService categoryService) {
 		this.categoryService = categoryService;
+	}
+
+	public GoodsService goodsService;
+	
+	public void setGoodsService(GoodsService goodsService) {
+		this.goodsService = goodsService;
 	}
 
 	protected T model = null;

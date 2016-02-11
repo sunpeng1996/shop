@@ -36,7 +36,7 @@
 	<!-- 让baseService类被动实例化 -->
 	<bean id="accountService" class="cn.itcast.shop.service.impl.AccountServiceImpl" parent="baseService"/>
 	<bean id="categoryService" class="cn.itcast.shop.service.impl.CategoryServiceImpl" parent="baseService"/>
-	
+	<bean id="goodsService" class="cn.itcast.shop.service.impl.GoodsServiceImpl" parent="baseService"/>
 	
 	
 	</beans>

@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	 <li><a href="${pageContext.request.contextPath}/admin/account/queryAccount.jsp" target="right">查询管理员</a></li>
       	 <li>添加类别</li>
       	 <li>查询类别</li>
+      	 <li><a href="${pageContext.request.contextPath}/admin/goods/saveGoods.jsp" target="right">添加商品</a></li>
       </ul>
   </body>
 </html>

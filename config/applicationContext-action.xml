@@ -8,12 +8,12 @@
 	
 	<bean id="baseAction" class="cn.itcast.action.BaseAction">
 			<property name="accountService" ref="accountService"></property>
+			<property name="goodsService" ref="goodsService"></property>
 			<property name="categoryService" ref="categoryService"></property>
 	</bean>
 
 	<bean id="accountAction" class="cn.itcast.action.AccountAction" scope="prototype" parent="baseAction"/>
 	<bean id="categoryAction" class="cn.itcast.action.CategoryAction" scope="prototype" parent="baseAction"></bean>
-	
-
+	<bean id="goodsAction" class="cn.itcast.action.GoodsAction" scope="prototype" parent="baseAction"></bean>
 	
 	</beans>
