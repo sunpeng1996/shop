@@ -19,12 +19,13 @@
 	</property>
 	<!-- <property name="myeclipse.connection.profile">
 		com.mysql.jdbc.Driver
-	</property> -->
+		</property> -->
 	<property name="c3p0.initialPoolSize">5</property>
 	<property name="c3p0.minPoolSize">10</property>
 	<property name="c3p0.maxPoolSize">20</property>
 	<property name="c3p0.maxIdleTime">6000</property>
 	<property name="show_sql">true</property>
+	<mapping resource="cn/itcast/shop/pojo/Account.hbm.xml" />
 	<mapping resource="cn/itcast/shop/pojo/Category.hbm.xml" />
 
 </session-factory>

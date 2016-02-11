@@ -1,7 +1,7 @@
 package cn.itcast.shop.pojo;
 
 /**
- * Caregory entity. @author MyEclipse Persistence Tools
+ * Category entity. @author MyEclipse Persistence Tools
  */
 
 public class Category implements java.io.Serializable {

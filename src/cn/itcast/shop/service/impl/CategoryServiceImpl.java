@@ -1,17 +1,14 @@
 package cn.itcast.shop.service.impl;
 
-import org.springframework.orm.hibernate3.HibernateTemplate;
+import java.util.List;
 
+import cn.itcast.shop.pojo.Account;
 import cn.itcast.shop.pojo.Category;
+import cn.itcast.shop.service.AccountService;
+import cn.itcast.shop.service.CategoryService;
 
-public class CategoryServiceImpl {
-	private HibernateTemplate hibernateTemplate;
+public class CategoryServiceImpl extends BaseServiceImpl<Category> implements CategoryService {
 
-	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-		this.hibernateTemplate = hibernateTemplate;
-	}
-	
-	public void save(Category category) {
-		 hibernateTemplate.save(category);
-	}
+		
+
 }
