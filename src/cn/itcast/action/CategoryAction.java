@@ -11,6 +11,9 @@ import cn.itcast.shop.pojo.Category;
 public class CategoryAction extends BaseAction<Category> {
 		public String save(){
 			categoryService.save(model);
+			
+			//即使同步到app内置对象中,每次保存操作都及时同步
+			application.put("categorys", categoryService.query());			
 			return "main";
 		}
 }

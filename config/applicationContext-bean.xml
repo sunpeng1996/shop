@@ -40,5 +40,9 @@
 	<bean id="fileUploadUtil" class="cn.itcast.shop.util.FileUploadUtil">
 			<property name="filePath" value="F:\javaweb2014 workspace\shop\WebRoot\image"></property>
 	</bean>
+	<bean id="shopTimerTask" class="cn.itcast.shop.util.ShopTimerTask">
+			<property name="categoryService" ref="categoryService"></property>
+			<property name="goodsService" ref="goodsService"></property>
+	</bean>
 	
 	</beans>

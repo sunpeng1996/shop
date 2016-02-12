@@ -34,7 +34,7 @@
         <property name="gopen" type="java.lang.Boolean">
             <column name="gopen" />
         </property>
-        <many-to-one name="category" class="cn.itcast.shop.pojo.Category">
+        <many-to-one name="category" class="cn.itcast.shop.pojo.Category" lazy="false">
         	<column name="cid"/>
         </many-to-one>
     </class>

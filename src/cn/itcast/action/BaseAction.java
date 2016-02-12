@@ -9,7 +9,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import cn.itcast.shop.service.AccountService;
 import cn.itcast.shop.service.CategoryService;
-import cn.itcast.shop.service.impl.GoodsService;
+import cn.itcast.shop.service.GoodsService;
 import cn.itcast.shop.util.FileUploadUtil;
 
 import com.opensymphony.xwork2.ActionSupport;
