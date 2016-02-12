@@ -34,7 +34,7 @@
 						图片上传：
 					</td>
 					<td colspan="2">
-						<input type="file" name="image" />
+						<input type="file" name="goodsFile.image" />
 						<br />
 					</td>
 				</tr>
@@ -44,11 +44,13 @@
 						商品类型：
 					</td>
 					<td>
-						<select id="cid" name="">
+						<select id="cid" name="category.cid">
 							<option value="0">
 								请选择
 							</option>
-							
+							<c:forEach items="${applicationScope.categorys }" var="category">
+									<option value="${category.cid }">${category.ctype }</option>
+							</c:forEach>
 						</select>
 					</td>
 					<td></td>

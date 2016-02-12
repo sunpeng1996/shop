@@ -1,6 +1,7 @@
 package cn.itcast.action;
 
 import cn.itcast.shop.pojo.Goods;
+import cn.itcast.shop.pojo.GoodsFile;
 
 /**
  * 
@@ -10,7 +11,20 @@ import cn.itcast.shop.pojo.Goods;
  */
 public class GoodsAction extends BaseAction<Goods> {
 	
+		private GoodsFile goodsFile;
+	
+		public GoodsFile getGoodsFile() {
+			return goodsFile;
+		}
+
+		public void setGoodsFile(GoodsFile goodsFile) {
+			this.goodsFile = goodsFile;
+		}
+
 		public String  save() {
+			String newFileName = fileUploadUtil.uploadFile(goodsFile.getImage(), goodsFile.getImageFileName());
+			//将新的文件名称保存到数据库
+			model.setGpic(newFileName);
 			goodsService.save(model);
 			return "main";
 		}

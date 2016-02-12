@@ -10,6 +10,7 @@
 			<property name="accountService" ref="accountService"></property>
 			<property name="goodsService" ref="goodsService"></property>
 			<property name="categoryService" ref="categoryService"></property>
+			<property name="fileUploadUtil" ref="fileUploadUtil"></property>
 	</bean>
 
 	<bean id="accountAction" class="cn.itcast.action.AccountAction" scope="prototype" parent="baseAction"/>

@@ -27,4 +27,10 @@
 	    <param-name>contextConfigLocation</param-name>
 	    <param-value>classpath:applicationContext-*.xml</param-value>
 	 </context-param>
+	 
+	 <!-- 所有的监听器必须配置在contextloaderListener的后面 -->
+	 <listener>
+	 	<listener-class>cn.itcast.shop.listener.ShopServletContextListener</listener-class>
+	 </listener>
+	 
 </web-app>
