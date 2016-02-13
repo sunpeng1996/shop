@@ -1,6 +1,7 @@
 package cn.itcast.action;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.ApplicationAware;
@@ -9,7 +10,9 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import cn.itcast.shop.service.AccountService;
 import cn.itcast.shop.service.CategoryService;
+import cn.itcast.shop.service.ForderService;
 import cn.itcast.shop.service.GoodsService;
+import cn.itcast.shop.service.SorderService;
 import cn.itcast.shop.util.FileUploadUtil;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -51,6 +54,33 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>,Reque
 		
 	public void setFileUploadUtil(FileUploadUtil fileUploadUtil) {
 		this.fileUploadUtil = fileUploadUtil;
+	}
+	
+	protected SorderService sorderService;
+
+	
+	
+	public void setSorderService(SorderService sorderService) {
+		this.sorderService = sorderService;
+	}
+
+	protected ForderService forderService;
+	
+	
+
+	public void setForderService(ForderService forderService) {
+		this.forderService = forderService;
+	}
+
+	protected Map<String , Object> jsonMap = new HashMap<String, Object>();
+ 	
+	
+	public Map<String, Object> getJsonMap() {
+		return jsonMap;
+	}
+
+	public void setJsonMap(Map<String, Object> jsonMap) {
+		this.jsonMap = jsonMap;
 	}
 
 	protected T model = null;

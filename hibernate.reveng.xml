@@ -14,8 +14,32 @@
 			<generator class="native"></generator>
 		</primary-key>
 	</table>
-<table name="goods" catalog="shop_new"
-	class="cn.itcast.shop.pojo.Goods">
+	<table name="goods" catalog="shop_new"
+		class="cn.itcast.shop.pojo.Goods">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+	<table name="forder" catalog="shop_new"
+		class="cn.itcast.shop.pojo.Forder">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+	<table name="sorder" catalog="shop_new"
+		class="cn.itcast.shop.pojo.Sorder">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+	<table name="status" catalog="shop_new"
+		class="cn.itcast.shop.pojo.Status">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+<table name="users" catalog="shop_new"
+	class="cn.itcast.shop.pojo.Users">
 	<primary-key>
 		<generator class="native"></generator>
 	</primary-key>

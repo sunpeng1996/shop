@@ -12,5 +12,9 @@ public interface CategoryService extends BaseService<Category>{
 	 * @return
 	 */
 	public List<Category> queryByChot(boolean chot);
+
+	public List<Category> queryByCtype(String ctype);
+	
+	
 	
 }

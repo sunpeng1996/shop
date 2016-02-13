@@ -15,6 +15,17 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category> implements Ca
 		return hibernateTemplate.findByNamedParam("FROM Category c WHERE c.chot=:chot", "chot", chot);
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Category> query(String ctype) {
+			return hibernateTemplate.find("FROM Category c ");
+		
+	}
+
+	public List<Category> queryByCtype(String ctype) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 		
 
 }

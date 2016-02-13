@@ -45,7 +45,10 @@
 						</tr>
 						<tr>
 							<td>
-								<a href="">详细</a>
+								<c:url var="detail" value="goodsAction_detail.action">
+										<c:param name="gid" value="${goods.gid }"></c:param>			
+								</c:url>
+								<a href="${detail }">详细</a>
 							</td>
 						</tr>
 					</table>

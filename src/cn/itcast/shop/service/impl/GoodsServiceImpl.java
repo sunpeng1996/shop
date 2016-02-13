@@ -36,6 +36,12 @@ public class GoodsServiceImpl extends BaseServiceImpl<Goods> implements GoodsSer
 		});
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Goods> queryByGname(String gname) {
+		
+		 return hibernateTemplate.findByNamedParam("FROM Goods g WHERE g.gname LIKE :gname", "gname", "%" + gname + "%");
+	}
+
 	
 
 }

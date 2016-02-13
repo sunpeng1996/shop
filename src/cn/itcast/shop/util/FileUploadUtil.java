@@ -70,5 +70,9 @@ public class FileUploadUtil {
 		return newName;
 	}
 
+	public void delete(String fileName){
+			new File(fileName).delete();
+	}
+
 }
 

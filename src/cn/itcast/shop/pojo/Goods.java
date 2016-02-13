@@ -41,20 +41,6 @@ public class Goods implements java.io.Serializable {
 		this.gdate = gdate;
 	}
 
-	/** full constructor */
-	public Goods(String gname, Double gprice, String gpic, String gremark,
-			String gxremark, Timestamp gdate, Boolean gcommend, Boolean gopen,
-			Integer cid) {
-		this.gname = gname;
-		this.gprice = gprice;
-		this.gpic = gpic;
-		this.gremark = gremark;
-		this.gxremark = gxremark;
-		this.gdate = gdate;
-		this.gcommend = gcommend;
-		this.gopen = gopen;
-		
-	}
 
 	// Property accessors
 

@@ -44,5 +44,7 @@
 			<property name="categoryService" ref="categoryService"></property>
 			<property name="goodsService" ref="goodsService"></property>
 	</bean>
+	<bean id="sorderService" class="cn.itcast.shop.service.impl.SorderServiceImpl" parent="baseService"></bean>
+	<bean id="forderService" class="cn.itcast.shop.service.impl.ForderServiceImpl" parent="baseService"></bean>
 	
 	</beans>

@@ -11,5 +11,7 @@ import cn.itcast.shop.pojo.Goods;
  *创建时间:2016年2月11日下午9:18:47
  */
 public interface GoodsService extends BaseService<Goods>{
-		public List<Goods> queryGoodsByCid(int cid);		
+		public List<Goods> queryGoodsByCid(int cid);
+
+		public List<Goods> queryByGname(String gname);		
 }

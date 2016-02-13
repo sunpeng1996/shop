@@ -11,10 +11,13 @@
 			<property name="goodsService" ref="goodsService"></property>
 			<property name="categoryService" ref="categoryService"></property>
 			<property name="fileUploadUtil" ref="fileUploadUtil"></property>
+			<property name="sorderService" ref="sorderService"></property>
+			<property name="forderService" ref="forderService"></property>
 	</bean>
 
 	<bean id="accountAction" class="cn.itcast.action.AccountAction" scope="prototype" parent="baseAction"/>
 	<bean id="categoryAction" class="cn.itcast.action.CategoryAction" scope="prototype" parent="baseAction"></bean>
 	<bean id="goodsAction" class="cn.itcast.action.GoodsAction" scope="prototype" parent="baseAction"></bean>
+	<bean id="sorderAction" class="cn.itcast.action.SorderAction" scope="prototype" parent="baseAction"></bean>
 	
 	</beans>

@@ -49,7 +49,7 @@ public class ShopServletContextListener implements ServletContextListener {
 		ShopTimerTask shopTimerTask = (ShopTimerTask) context.getBean("shopTimerTask");
 		shopTimerTask.setApplication(se.getServletContext());
 		//设置执行时间
-		new Timer().schedule(shopTimerTask, 0, 1000*10);
+		new Timer(true).schedule(shopTimerTask, 0, 1000*10*60);
 
 	}
 

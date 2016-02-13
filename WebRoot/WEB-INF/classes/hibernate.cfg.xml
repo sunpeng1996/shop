@@ -25,9 +25,27 @@
 	<property name="c3p0.maxPoolSize">20</property>
 	<property name="c3p0.maxIdleTime">6000</property>
 	<property name="show_sql">true</property>
+
+	<property name="hibernate.cache.use_second_level_cache">
+		true
+	</property>
+	<!-- 配置二级缓存的提供商,缓存有免费,收费的,内存级缓存,硬盘缓存....参考Hibernate学习文档 -->
+	<property name="hibernate.cache.provider_class">
+		org.hibernate.cache.EhCacheProvider
+	</property>
+
 	<mapping resource="cn/itcast/shop/pojo/Account.hbm.xml" />
 	<mapping resource="cn/itcast/shop/pojo/Category.hbm.xml" />
 	<mapping resource="cn/itcast/shop/pojo/Goods.hbm.xml" />
+
+	<!-- 配置缓存策略,和支持二级缓存的类 -->
+	<mapping resource="cn/itcast/shop/pojo/Forder.hbm.xml" />
+	<mapping resource="cn/itcast/shop/pojo/Sorder.hbm.xml" />
+	<mapping resource="cn/itcast/shop/pojo/Status.hbm.xml" />
+	<mapping resource="cn/itcast/shop/pojo/Users.hbm.xml" />
+	<class-cache usage="read-write" class="cn.itcast.shop.pojo.Goods" />
+	<class-cache usage="read-write"
+		class="cn.itcast.shop.pojo.Category" />
 
 </session-factory>
 
