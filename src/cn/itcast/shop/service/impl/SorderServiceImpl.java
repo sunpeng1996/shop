@@ -23,6 +23,7 @@ public class SorderServiceImpl extends BaseServiceImpl<Sorder> implements Sorder
 		//没有重复的购物项，新增到购物车集合中
 		if(!isHave){
 				sorders.add(sorder);
+				sorder.setForder(forder);//把订单也设置到订单项中
 		}
 		//
 		//forder.setSorders(sorders);

@@ -3,6 +3,7 @@ package cn.itcast.shop.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -74,5 +75,17 @@ public class FileUploadUtil {
 			new File(fileName).delete();
 	}
 
+	// 2: 获取给定路径的所有文件名,支持过滤
+	public String[] getFileName(String path){
+			File file=new File(path);
+			//这里用到了一个过滤器
+			return file.list(new FilenameFilter() {
+				public boolean accept(File dir, String name) {
+					return name.endsWith(".gif")?true:false;
+				}
+			});	
+	}
+	
+	
 }
 

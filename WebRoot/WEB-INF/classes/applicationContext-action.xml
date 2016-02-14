@@ -13,11 +13,12 @@
 			<property name="fileUploadUtil" ref="fileUploadUtil"></property>
 			<property name="sorderService" ref="sorderService"></property>
 			<property name="forderService" ref="forderService"></property>
+			<property name="usersService" ref="usersService"></property>
 	</bean>
-
+	
 	<bean id="accountAction" class="cn.itcast.action.AccountAction" scope="prototype" parent="baseAction"/>
 	<bean id="categoryAction" class="cn.itcast.action.CategoryAction" scope="prototype" parent="baseAction"></bean>
 	<bean id="goodsAction" class="cn.itcast.action.GoodsAction" scope="prototype" parent="baseAction"></bean>
 	<bean id="sorderAction" class="cn.itcast.action.SorderAction" scope="prototype" parent="baseAction"></bean>
-	
+	<bean id="usersAction" class="cn.itcast.action.UsersAction" scope="prototype" parent="baseAction"></bean>
 	</beans>

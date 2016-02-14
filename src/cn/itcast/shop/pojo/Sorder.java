@@ -13,8 +13,17 @@ public class Sorder implements java.io.Serializable {
 	private Double sprice;
 	private Integer snumber;
 	private Goods goods;
+	private Forder forder;
 
 	// Constructors
+
+	public Forder getForder() {
+		return forder;
+	}
+
+	public void setForder(Forder forder) {
+		this.forder = forder;
+	}
 
 	public Goods getGoods() {
 		return goods;

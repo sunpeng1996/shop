@@ -42,8 +42,8 @@
          <many-to-one name="status" class="cn.itcast.shop.pojo.Status">
          		<column name="sid"></column>
          </many-to-one>
-        
-        <set name="sorders" >
+         <!-- cascade 级联插入 inverse="true" 对方, 子表管理键  -->
+        <set name="sorders" cascade="all" inverse="true">
         		<key column="fid"></key>
         		<one-to-many class="cn.itcast.shop.pojo.Sorder"/>
         </set>

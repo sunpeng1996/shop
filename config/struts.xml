@@ -20,6 +20,8 @@
 	
 		<global-results>
 			<result name="main">/admin/main.jsp</result>
+			<result name="login">login.jsp</result>
+			<result name="index">index.jsp</result>
 		</global-results>
 	
 		<!-- action配置在此处 -->
@@ -45,8 +47,12 @@
 					</result>
 			</action>
 			
-			<action name="forderAction" class="cn.itcast.action.ForderAction"></action>
-			
+			<action name="forderAction_*" class="cn.itcast.action.ForderAction" method="{1}">
+				<result name="bank">/users/bank.jsp</result>
+			</action>
+			<action name="usersAction_*" class="cn.itcast.action.UsersAction" method="{1}">
+					<result name="goUrl">${goUrl}</result>
+			</action>
 	</package>
 		
 </struts>    

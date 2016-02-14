@@ -17,6 +17,7 @@ import cn.itcast.shop.pojo.Category;
 import cn.itcast.shop.pojo.Goods;
 import cn.itcast.shop.service.CategoryService;
 import cn.itcast.shop.service.GoodsService;
+import cn.itcast.shop.util.FileUploadUtil;
 import cn.itcast.shop.util.ShopTimerTask;
 
 public class ShopServletContextListener implements ServletContextListener {
@@ -28,6 +29,8 @@ public class ShopServletContextListener implements ServletContextListener {
 	//private GoodsService goodsService;
 	
 	private ShopTimerTask shopTimerTask;
+	
+	private FileUploadUtil fileUploadUtil;
 
 	public void contextDestroyed(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
@@ -41,6 +44,8 @@ public class ShopServletContextListener implements ServletContextListener {
 		//spring的配置文件，项目启动时配置文件读取后也存储到了application内置对象中
 		context = WebApplicationContextUtils.getWebApplicationContext(se.getServletContext());
 		categoryService = (CategoryService) context.getBean("categoryService");
+		fileUploadUtil = (FileUploadUtil) context.getBean("fileUploadUtil");
+		
 		//goodsService=(GoodsService) context.getBean("goodsService");
 		//获取所有的类别，存储到app内置对象中
 		se.getServletContext().setAttribute("categorys", categoryService.query());
@@ -50,6 +55,11 @@ public class ShopServletContextListener implements ServletContextListener {
 		shopTimerTask.setApplication(se.getServletContext());
 		//设置执行时间
 		new Timer(true).schedule(shopTimerTask, 0, 1000*10*60);
+		
+		String path = se.getServletContext().getRealPath("/image/logo");
+		se.getServletContext().setAttribute("bankImages", fileUploadUtil.getFileName(path));
+	
+		
 
 	}
 

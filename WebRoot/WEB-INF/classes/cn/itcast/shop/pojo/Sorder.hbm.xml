@@ -23,5 +23,8 @@
         <many-to-one name="goods" class="cn.itcast.shop.pojo.Goods">
         	<column name="gid"></column>
         </many-to-one>
+        <many-to-one name="forder" class="cn.itcast.shop.pojo.Forder">
+        	<column name="fid"></column>
+        </many-to-one>
     </class>
 </hibernate-mapping>

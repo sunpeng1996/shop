@@ -13,6 +13,7 @@ import cn.itcast.shop.service.CategoryService;
 import cn.itcast.shop.service.ForderService;
 import cn.itcast.shop.service.GoodsService;
 import cn.itcast.shop.service.SorderService;
+import cn.itcast.shop.service.UsersService;
 import cn.itcast.shop.util.FileUploadUtil;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -83,6 +84,16 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>,Reque
 		this.jsonMap = jsonMap;
 	}
 
+	protected UsersService usersService = null;
+	
+	public void setUsersService(UsersService usersService) {
+		this.usersService = usersService;
+	}
+	
+	
+	
+	
+	
 	protected T model = null;
 	
 	public T getModel() {

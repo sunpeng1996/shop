@@ -34,6 +34,7 @@
 		<property name="hibernateTemplate" ref="hibernateTemplate"/>
 	</bean>
 	<!-- 让baseService类被动实例化 -->
+	<!-- parent在spring配置文件中找父类，父类通过Spring的方式创建，这样父类就可以实现依赖注入 -->
 	<bean id="accountService" class="cn.itcast.shop.service.impl.AccountServiceImpl" parent="baseService"/>
 	<bean id="categoryService" class="cn.itcast.shop.service.impl.CategoryServiceImpl" parent="baseService"/>
 	<bean id="goodsService" class="cn.itcast.shop.service.impl.GoodsServiceImpl" parent="baseService"/>
@@ -46,5 +47,5 @@
 	</bean>
 	<bean id="sorderService" class="cn.itcast.shop.service.impl.SorderServiceImpl" parent="baseService"></bean>
 	<bean id="forderService" class="cn.itcast.shop.service.impl.ForderServiceImpl" parent="baseService"></bean>
-	
+	<bean id="usersService" class="cn.itcast.shop.service.impl.UsersServiceImpl" parent="baseService"></bean>
 	</beans>
