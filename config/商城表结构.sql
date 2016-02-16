@@ -140,7 +140,7 @@ create table forder
    primary key (fid)
 );
 /* 修改自动增长的初始值 */
-ALTER TABLE forder AUTO_INCREMENT = 2013021801;
+ALTER TABLE forder AUTO_INCREMENT = 2016021601;
 
 /*=============================*/
 /* Table: 订单项表结构 		   */

@@ -18,16 +18,25 @@
   </head>
   
   <body>
+   支付订单号:${sessionScope.forder.fid}<br/>
+   支付金额为:${sessionScope.forder.ftotal} <br/>
+   <form action="${pageContext.request.contextPath}/payAction_submit.action" method="post">
       请选择银行:
       <table>
       	<tr>
       	   <c:forEach items="${applicationScope.bankImages}" var="image" varStatus="num">
-      			<td><img src="${pageContext.request.contextPath}/image/logo/${image}"  /></td>
+      			<td>
+      			<input type="radio" name="pd_FrpId" value="${fn:substring(image, 0,fn:indexOf(image,'.'))}" />
+      			<img src="${pageContext.request.contextPath}/image/logo/${image}"  /></td>
       			 <c:if test="${num.count%5==0}">
       	   	  	  	</tr><tr>
       	   	  	</c:if>
       	   </c:forEach>
       	</tr>
       </table>
+      <input type="hidden" name="p2_Order" value="${sessionScope.forder.fid}"><br/>
+      <input type="hidden" name="p3_Amt" value="${sessionScope.forder.ftotal}"><br/>
+      <input type="submit" value="提交" />     
+   </form>
   </body>
 </html>

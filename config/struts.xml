@@ -53,6 +53,10 @@
 			<action name="usersAction_*" class="cn.itcast.action.UsersAction" method="{1}">
 					<result name="goUrl">${goUrl}</result>
 			</action>
+			<action name="payAction_*" class="cn.itcast.action.PayAction" method="{1}">
+					<result name="reqpay">/users/reqpay.jsp</result>
+					<result name="payResult">/users/payResult.jsp</result>
+			</action>
 	</package>
 		
 </struts>    

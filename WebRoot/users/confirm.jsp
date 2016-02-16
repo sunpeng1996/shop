@@ -1,5 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -17,8 +19,8 @@
 	</head>
 
 	<body>
-			显示最终信息页面和填写配送信息页面,成功啦
-			购物订单如下:
+		显示最终订单信息,和填写配送信息页面<br/>
+		购物信息如下:
     	<table>
 			<tr>
 				<td>
@@ -45,6 +47,13 @@
     		</tr>
     	</c:forEach>
     </table>
+    
+    <div id="ftotal">
+        <!-- 显示购物的总价格, 并且保留2位小数 -->
+        <fmt:formatNumber pattern="#.##" value="${sessionScope.forder.ftotal}"></fmt:formatNumber>
+    </div>
+    
+    请填写配送信息:<br/>
     <form action="${pageContext.request.contextPath}/forderAction_save.action" method="post">
 	    <table border="1" width="490">
 	    	<tr>
@@ -72,5 +81,4 @@
     	<input type="submit" value="提交订单">
     </form>
 	</body>
-		
 </html>

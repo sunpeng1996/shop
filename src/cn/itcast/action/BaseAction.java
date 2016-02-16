@@ -14,6 +14,7 @@ import cn.itcast.shop.service.ForderService;
 import cn.itcast.shop.service.GoodsService;
 import cn.itcast.shop.service.SorderService;
 import cn.itcast.shop.service.UsersService;
+import cn.itcast.shop.service.impl.OnlinePayService;
 import cn.itcast.shop.util.FileUploadUtil;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -90,10 +91,12 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>,Reque
 		this.usersService = usersService;
 	}
 	
-	
-	
-	
-	
+	protected OnlinePayService onlinePayService;
+		
+	public void setOnlinePayService(OnlinePayService onlinePayService) {
+		this.onlinePayService = onlinePayService;
+	}
+
 	protected T model = null;
 	
 	public T getModel() {
