@@ -8,6 +8,7 @@ import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import cn.itcast.shop.lucene.LuceneServiceImpl;
 import cn.itcast.shop.service.AccountService;
 import cn.itcast.shop.service.CategoryService;
 import cn.itcast.shop.service.ForderService;
@@ -16,6 +17,7 @@ import cn.itcast.shop.service.SorderService;
 import cn.itcast.shop.service.UsersService;
 import cn.itcast.shop.service.impl.OnlinePayService;
 import cn.itcast.shop.util.FileUploadUtil;
+import cn.itcast.shop.util.ShopEmailUtil;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -68,7 +70,11 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>,Reque
 
 	protected ForderService forderService;
 	
+	protected ShopEmailUtil shopEmailUtil;
 	
+	public void setShopEmaiUtil(ShopEmailUtil shopEmailUtil) {
+		this.shopEmailUtil = shopEmailUtil;
+	}
 
 	public void setForderService(ForderService forderService) {
 		this.forderService = forderService;
@@ -79,6 +85,15 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>,Reque
 	
 	public Map<String, Object> getJsonMap() {
 		return jsonMap;
+	}
+
+	
+	protected LuceneServiceImpl luceneServiceImpl;
+	
+	
+	
+	public void setLuceneServiceImpl(LuceneServiceImpl luceneServiceImpl) {
+		this.luceneServiceImpl = luceneServiceImpl;
 	}
 
 	public void setJsonMap(Map<String, Object> jsonMap) {

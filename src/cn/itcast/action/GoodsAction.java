@@ -1,9 +1,10 @@
 package cn.itcast.action;
 
-import javax.management.Query;
+import java.util.List;
 
 import cn.itcast.shop.pojo.Goods;
 import cn.itcast.shop.pojo.GoodsFile;
+import cn.itcast.shop.pojo.KeyWord;
 
 /**
  * 
@@ -14,6 +15,23 @@ import cn.itcast.shop.pojo.GoodsFile;
 public class GoodsAction extends BaseAction<Goods> {
 	
 		private GoodsFile goodsFile;
+		
+		private List<KeyWord> keyWords=null;
+		
+		public List<KeyWord> getKeyWords() {
+			return keyWords;
+		}
+
+		private String q;
+
+		public String getQ() {
+			return q;
+		}
+
+		public void setQ(String q) {
+			this.q = q;
+		}
+		
 	
 		public GoodsFile getGoodsFile() {
 			return goodsFile;
@@ -22,6 +40,18 @@ public class GoodsAction extends BaseAction<Goods> {
 		public void setGoodsFile(GoodsFile goodsFile) {
 			this.goodsFile = goodsFile;
 		}
+		
+		public String auto(){
+			System.out.println(q);
+			keyWords=luceneServiceImpl.getTermKey(q);
+			return "json";
+		}
+		
+		public String search(){
+			request.put("goodsList",luceneServiceImpl.query(model.getGname()));
+			return "search";
+		}
+		
 
 		public String  save() {
 			String newFileName = fileUploadUtil.uploadFile(goodsFile.getImage(), goodsFile.getImageFileName());

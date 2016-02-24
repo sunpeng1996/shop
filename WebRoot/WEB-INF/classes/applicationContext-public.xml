@@ -31,6 +31,14 @@
 			<aop:advisor advice-ref="advice" pointcut-ref="pointcut"/>	
 	</aop:config>
 	
+	
+	 <aop:config>
+	 	<!-- 配置切面 -->
+	 	<aop:aspect ref="luceneServiceImpl">
+	 	<!-- aop 不支持继承方法切入. 切入之前需要重写父类的方法 -->
+	 	<aop:after-returning method="saveGoods" pointcut="execution(* cn.itcast.shop.service.impl.GoodsServiceImpl.save(..))"/>
+	 	</aop:aspect>
+	 </aop:config>
 		
 			
 	</beans>

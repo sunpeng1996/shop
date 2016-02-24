@@ -37,6 +37,10 @@
 					<result name="query">/admin/goods/query.jsp</result>
 					<result name="update">/admin/goods/update.jsp</result>
 					<result name="detail">/detail.jsp</result>
+					<result name="search">/search.jsp</result>
+					<result name="json" type="json">
+						<param name="root">keyWords</param>
+					</result>
 			</action>
 			
 			<action name="sorderAction_*" method="{1}" class="sorderAction">

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="configuration" class="cn.itcast.shop.lucene.Configuration" init-method="init">
+		<property name="dirPath" value="F:/javaweb Tomcat/apache-tomcat-7.0.42/webapps/shop/indexDir" />
+	</bean>
+	
+	<bean id="documentUtil" class="cn.itcast.shop.lucene.DocumentUtil" />
+	
+	<bean id="luceneUtil" class="cn.itcast.shop.lucene.LuceneUtil" init-method="init" destroy-method="destory">
+		<property name="configuration" ref="configuration" />
+	</bean>
+	
+	<bean id="highlighterUtil" class="cn.itcast.shop.lucene.HighlighterUtil">
+		<property name="configuration" ref="configuration" />
+	</bean>
+	
+	<bean id="luceneServiceImpl" class="cn.itcast.shop.lucene.LuceneServiceImpl">
+		<property name="luceneUtil" ref="luceneUtil" />
+		<property name="documentUtil" ref="documentUtil" />
+		<property name="highlighterUtil" ref="highlighterUtil" />
+	</bean>
+	
+</beans>

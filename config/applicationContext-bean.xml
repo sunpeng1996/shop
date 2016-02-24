@@ -49,7 +49,7 @@
 	<bean id="forderService" class="cn.itcast.shop.service.impl.ForderServiceImpl" parent="baseService"></bean>
 	<bean id="usersService" class="cn.itcast.shop.service.impl.UsersServiceImpl" parent="baseService"></bean>
 	<bean id="onlinePayService" class="cn.itcast.shop.service.impl.OnlinePayService" ></bean>
-	
+	<bean id="shopEmailUtil" class="cn.itcast.shop.util.ShopEmailUtil" />
 	
 	
 	</beans>

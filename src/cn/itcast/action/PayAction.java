@@ -76,7 +76,7 @@ public class PayAction extends BaseAction<SendData> {
 				Forder forder = (Forder) session.get("forder");
 				Users users = (Users) session.get("users");
 				//邮件这块有问题
-				MailUitls.sendMessage(forder, users);
+				shopEmailUtil.sendMessage(forder, users);
 				req.setAttribute("info", "订单" + forder.getFid() + "支付成功");
 			} else {
 				// 支付失败,编写失败信息
