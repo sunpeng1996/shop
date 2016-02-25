@@ -1,0 +1,99 @@
+package cn.itcast.shop.interceptor;
+
+import java.util.Enumeration;
+import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.StrutsStatics;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import cn.itcast.shop.pojo.Account;
+import cn.itcast.shop.pojo.Logs;
+import cn.itcast.shop.pojo.Users;
+import cn.itcast.shop.service.LogsService;
+
+import com.opensymphony.xwork2.ActionInvocation;
+import com.opensymphony.xwork2.config.entities.ExceptionMappingConfig;
+import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
+
+/*
+ * 是AbstractInterceptor拦截器的子类,实现了对方法的拦截, 细粒度更高
+ * 
+ * 配置 过滤的方法
+ * */
+
+public class LogsInterceptor extends MethodFilterInterceptor {
+	/**
+	 * 
+	 */
+	private LogsService logsService = null;
+
+	private static final long serialVersionUID = -2374931487192414354L;
+
+	/*
+	 * 日志要实现的业务逻辑
+	 */
+	@Override
+	protected String doIntercept(ActionInvocation invocation) throws Exception {
+		String result=invocation.invoke();
+		//获取异常配置信息
+		List<ExceptionMappingConfig> exceptionMappings = invocation.getProxy().getConfig().getExceptionMappings();
+		for(ExceptionMappingConfig temp:exceptionMappings){
+			if(temp.getResult().equals(result)){
+				// 说明出现异常，直接跳转，不执行下面代码
+				return result;
+			}
+//			System.out.println(temp.getName());
+//			System.out.println(temp.getExceptionClassName());
+		}
+		// TODO Auto-generated method stub
+		// 1: 获取logsServiceImpl业务逻辑类
+		// 获取application内置对象
+		ServletContext sc = (ServletContext) invocation.getInvocationContext()
+				.get(StrutsStatics.SERVLET_CONTEXT);
+		// 获取Spring配置文件
+		ApplicationContext context = (ApplicationContext) WebApplicationContextUtils
+				.getWebApplicationContext(sc);
+		// 获取logsServiceImpl
+		logsService = (LogsService) context.getBean("logsService");
+		// 2: 获取所有的参数信息
+		Logs logs=new Logs();
+		HttpServletRequest request = (HttpServletRequest) invocation
+				.getInvocationContext().get(StrutsStatics.HTTP_REQUEST);
+		// 获取所有的参数名称
+		Enumeration<String> parmEnum=request.getParameterNames();
+		StringBuffer buffer=new StringBuffer();
+		while(parmEnum.hasMoreElements()){
+			// 通过当前名称获取当前的值  sname:admin,spass:***,
+			String paramName=parmEnum.nextElement();
+			// 追加参数名
+			buffer.append(paramName);
+			buffer.append(":");
+			for(String temp:request.getParameterValues(paramName)){
+				buffer.append(temp);
+				buffer.append("、");
+			}
+			buffer.deleteCharAt(buffer.length()-1);
+			buffer.append(",");
+		}
+		
+		logs.setLpath(request.getRequestURI());
+		// 获取连接好的参数
+		logs.setLparam(buffer.deleteCharAt(buffer.length()-1).toString());
+		Object o=request.getSession().getAttribute("users");
+		if(o!=null){
+			logs.setUsers((Users)o);
+		}
+		o=request.getSession().getAttribute("account");
+		if(o!=null){
+			logs.setAccount((Account)o);
+		}
+		// 3: 日志入库,并且跳转到下一个拦截器
+		logsService.save(logs);
+		return result;
+	}
+
+}

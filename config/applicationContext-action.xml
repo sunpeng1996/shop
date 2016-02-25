@@ -15,7 +15,7 @@
 			<property name="forderService" ref="forderService"></property>
 			<property name="usersService" ref="usersService"></property>
 			<property name="onlinePayService" ref="onlinePayService"></property>
-			<property name="shopEmailUtil" ref="shopEmailUtil" />
+			<!--  <property name="shopEmailUtil" ref="shopEmailUtil" />-->
 			<property name="luceneServiceImpl" ref="luceneServiceImpl"></property>
 	</bean>
 	

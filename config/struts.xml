@@ -18,11 +18,26 @@
 	-->
 	<package name="shop" extends="json-default">
 	
+	<interceptors>
+			<interceptor name="logsInterceptor" class="cn.itcast.shop.interceptor.LogsInterceptor" />
+			<interceptor-stack name="defaultStack">
+				<interceptor-ref name="logsInterceptor">
+					<param name="includeMethods">save*,update*,delete*</param>
+				</interceptor-ref>
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+	
 		<global-results>
 			<result name="main">/admin/main.jsp</result>
 			<result name="login">login.jsp</result>
 			<result name="index">index.jsp</result>
+			<result name="error">/error.jsp</result>
 		</global-results>
+	
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
 	
 		<!-- action配置在此处 -->
 			<action name="accountAction_*" class="accountAction" method="{1}">

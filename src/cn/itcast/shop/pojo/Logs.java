@@ -1,0 +1,84 @@
+package cn.itcast.shop.pojo;
+
+import java.sql.Timestamp;
+
+/**
+ * Logs entity. @author MyEclipse Persistence Tools
+ */
+
+public class Logs implements java.io.Serializable {
+
+	// Fields
+
+	private Integer lid;
+	private String lpath;
+	private String lparam;
+	private Timestamp ldate;
+	private Users users;
+	
+	private Account account;
+
+	// Constructors
+
+	/** default constructor */
+	public Logs() {
+	}
+
+	/** minimal constructor */
+	public Logs(Timestamp ldate) {
+		this.ldate = ldate;
+	}
+
+	
+	// Property accessors
+
+	public Integer getLid() {
+		return this.lid;
+	}
+
+	public void setLid(Integer lid) {
+		this.lid = lid;
+	}
+
+	public String getLpath() {
+		return this.lpath;
+	}
+
+	public void setLpath(String lpath) {
+		this.lpath = lpath;
+	}
+
+	public String getLparam() {
+		return this.lparam;
+	}
+
+	public void setLparam(String lparam) {
+		this.lparam = lparam;
+	}
+
+	public Timestamp getLdate() {
+		return this.ldate;
+	}
+
+	public void setLdate(Timestamp ldate) {
+		this.ldate = ldate;
+	}
+
+	public Users getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+
+}

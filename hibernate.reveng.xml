@@ -38,8 +38,14 @@
 			<generator class="native"></generator>
 		</primary-key>
 	</table>
-<table name="users" catalog="shop_new"
-	class="cn.itcast.shop.pojo.Users">
+	<table name="users" catalog="shop_new"
+		class="cn.itcast.shop.pojo.Users">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+<table name="logs" catalog="shop_new"
+	class="cn.itcast.shop.pojo.Logs">
 	<primary-key>
 		<generator class="native"></generator>
 	</primary-key>
