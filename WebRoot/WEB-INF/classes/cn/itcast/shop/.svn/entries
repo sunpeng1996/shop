@@ -1,0 +1,55 @@
+10
+
+dir
+21
+svn://192.168.10.188/shop/src/cn/itcast/shop
+svn://192.168.10.188
+
+
+
+2013-04-14T04:04:56.187500Z
+21
+admin
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+057e4c1d-ce35-414a-8230-07f3e539d11a
+
+action
+dir
+
+filter
+dir
+
+interceptor
+dir
+
+jstl
+dir
+
+listener
+dir
+
+lucene
+dir
+
+pojo
+dir
+
+service
+dir
+
+util
+dir
+

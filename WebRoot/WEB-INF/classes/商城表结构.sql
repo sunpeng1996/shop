@@ -1,9 +1,6 @@
-/*删除商城数据库,如果存在*/
-drop database if exists shop_new_new;
-/*创建数据库,并设置编码*/
-create database shop_new default character set utf8;
-
-use shop_new;
+drop database if exists shop;
+create database shop;
+use shop;
 /*删除管理员表*/
 drop table if exists account;
 /*删除用户表*/
@@ -140,7 +137,7 @@ create table forder
    primary key (fid)
 );
 /* 修改自动增长的初始值 */
-ALTER TABLE forder AUTO_INCREMENT = 2016021601;
+ALTER TABLE forder AUTO_INCREMENT = 2113121801;
 
 /*=============================*/
 /* Table: 订单项表结构 		   */
@@ -183,6 +180,8 @@ create table logs
    /* 设置日志编号为主键 */
    primary key (lid)
 );
+
+/*  ****Action_save.action   cid=5,ctype=男士休闲,chot=false*/
 
 
 /*=============================*/
@@ -276,7 +275,7 @@ INSERT INTO goods (gname,gprice,gpic,gremark,gxremark,gcommend,gopen,cid) VALUES
 ('金士顿优盘',299.00,'test.jpg','这里是简单介绍','这里是详细介绍',true,true,3);
 
 INSERT INTO goods (gname,gprice,gpic,gremark,gxremark,gcommend,gopen,cid) VALUES 
-('日立硬盘',599.00,'test.jpg','这里是简单介绍','这里是详细介绍',true,true,3);
+('日立硬盘',0.1,'test.jpg','这里是简单介绍','这里是详细介绍',true,true,3);
 
 INSERT INTO goods (gname,gprice,gpic,gremark,gxremark,gcommend,gopen,cid) VALUES 
 ('大水牛机箱',399.00,'test.jpg','这里是简单介绍','这里是详细介绍',true,true,3);
@@ -315,3 +314,111 @@ SELECT * FROM goods;
 SELECT * FROM status;
 SELECT * FROM forder;
 SELECT * FROM sorder;
+select * from logs;
+
+UPDATE users set uemail='soft03_test@sina.com';
+
+/*--- 创建权限表: 存储 要控制的URL地址*/
+drop table if exists role_privilege;
+drop table if exists privilege;
+drop table if exists role;
+
+create table privilege(
+    pid int auto_increment,
+    /* 存储权限的名次   添加商品 */
+    pname varchar(100),
+    /* 存储权限的URL地址, goodsAction_save */
+    purl varchar(200),
+    isleft boolean,
+    /* 此键是外键,参照自身表主键  */
+    parentId int,
+    primary key(pid)
+);
+
+/*  角色表: 虚拟的概念,不是真正操作员 */
+create table role(
+    rid int auto_increment,
+    rname varchar(100),
+    rdetail varchar(500),
+    primary key(rid)
+);
+
+/* 权限和角色是多对多的关系, 要建立权限、角色关联表 */
+create table role_privilege(
+    rid int,
+    pid int,
+    primary key(rid,pid)
+);
+
+/* 操作员和角色是多对多的,要建立关联表 */
+create table account_role(
+	aid int,
+	rid int,
+	primary key(aid,rid)
+);
+
+SELECT * FROM account;
+SELECT * FROM account_role;
+
+alter table privilege add constraint foreign key (parentId)
+references privilege (pid) on delete SET NULL on update SET NULL;
+
+alter table role_privilege add constraint foreign key (rid)
+references role (rid);
+
+alter table role_privilege add constraint foreign key (pid)
+references privilege (pid);
+
+INSERT INTO privilege (pname,purl,isleft) values ('商品管理','goodsAction_all',true);
+INSERT INTO privilege (pname,purl,isleft) values ('类别管理','categoryAction_all',true);
+INSERT INTO privilege (pname,purl,isleft) values ('操作员管理','accountAction_all',true);
+INSERT INTO privilege (pname,purl,isleft) values ('订单管理','accountAction_all',true);
+INSERT INTO privilege (pname,purl,isleft) values ('角色管理','roleAction_all',true);
+
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('添加商品','goodsAction_saveUI',true,1);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('添加商品操作','goodsAction_save',false,1);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('查询商品','goodsAction_queryUI',true,1);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('查询商品操作','goodsAction_query',false,1);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('更新商品','goodsAction_updateUI',false,1);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('更新商品操作','goodsAction_update',false,1);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('删除商品','goodsAction_delete',false,1);
+
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('添加类别','categoryAction_saveUI',true,2);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('添加类别操作','categoryAction_save',false,2);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('查询类别','categoryAction_queryUI',true,2);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('查询类别操作','categoryAction_query',false,2);
+/* 类别是用ajax更新的, 所以没有更新类别的UI界面 */
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('更新类别操作','categoryAction_update',false,2);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('删除类别','categoryAction_delete',false,2);
+
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('添加操作员','accountAction_saveUI',true,3);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('添加操作员操作','accountAction_save',false,3);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('查询操作员','accountAction_queryUI',true,3);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('查询操作员操作','accountAction_query',false,3);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('更新操作员','accountAction_updateUI',false,3);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('更新操作员操作','accountAction_update',false,3);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('删除操作员','accountAction_delete',false,3);
+
+/* 添加订单是users的操作,操作员不能添加订单  */
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('查询订单','forderAction_queryUI',true,4);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('查询订单操作','forderAction_query',false,4);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('更新订单','forderAction_updateUI',true,4);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('更新订单操作','forderAction_update',false,4);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('删除订单','forderAction_delete',false,4);
+
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('添加角色','roleAction_saveUI',true,5);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('添加角色操作','roleAction_save',false,5);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('查询角色','roleAction_queryUI',true,5);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('查询角色操作','roleAction_query',false,5);
+/* 对角色的属性,进行更新操作, 包括授权操作 */
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('更新角色','roleAction_updateUI',false,5);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('更新角色操作','roleAction_update',false,5);
+INSERT INTO privilege (pname,purl,isleft,parentId) values ('删除角色','roleAction_delete',false,5);
+
+
+SELECT * FROM privilege;
+SELECT * FROM role;
+SELECT * FROM role_privilege;
+
+/* 查询某个角色拥有的权限菜单 */
+SELECT * FROM role r inner join role_privilege rp on r.rid=rp.rid inner join privilege p on rp.pid=p.pid

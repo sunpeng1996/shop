@@ -4,53 +4,55 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-
-		<!-- 整合
-		1.让spring来管理hibernate的配置文件，取代了hibernatesessionfactory
-		2.通过sessionFactory返回session,在spring中由hibernateTemplete封装了session
-		3.如果要实现spring的aop声明式事务，则需要spring提供事务管理器，所有的session都是从sessionFactory中创建的
-			事务管理器需要控制sessionFactory。
-		4.配置事务通知和切入表达式，需要配置哪些方法被切入哪种事务类型即可
-		5.配置切入表达式，然后与事务通知整合，组成完整的切入表达式
+	
+	
+	<!-- 
+		1: Spring来管理Hibernate配置文件,就是取代了HibernateSessionFactory
+		2: 通过sessionFactory,返回session,在Spring由HibenrateTemplate封装session
+		3: 如果要实现Spring的AOP声明式事务,则需要Spring提供事物管理器,所有session都是从sessionFactory创建的,
+		事务管理器,需要控制sessionFactory
+		4: 配置事物通知(通知就是运行时动态切入的方法,Spring已经把事物模块化,只需要配置那些方法被切入那种事务类型即可)
+		5: 配置切入表达式,让后与事务通知整合,组成完整的切入表达式
 	 -->
-	 <!-- 1 -->
-	 <bean  id="sessionFactory"  class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-	 		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+	 <!-- 1: -->
+	 <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+	 	<!-- 加载hibernate的配置文件 -->
+	 	<property name="configLocation" value="classpath:hibernate.cfg.xml" />
 	 </bean>
 	 
-	 <!-- 2.对Hibernate Session进行了封装 -->
-	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	
-	<!-- 3.配置事物管理器transactionManager -->
-	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	
-	<!-- 注意：此类不能直接实例化，因为此类的构造方法要通过子类调用，获得子类的相关信息 -->
-	<bean id="baseService" class="cn.itcast.shop.service.impl.BaseServiceImpl" lazy-init="true">
-		<property name="hibernateTemplate" ref="hibernateTemplate"/>
-	</bean>
-	<!-- 让baseService类被动实例化 -->
-	<!-- parent在spring配置文件中找父类，父类通过Spring的方式创建，这样父类就可以实现依赖注入 -->
-	<bean id="accountService" class="cn.itcast.shop.service.impl.AccountServiceImpl" parent="baseService"/>
-	<bean id="categoryService" class="cn.itcast.shop.service.impl.CategoryServiceImpl" parent="baseService"/>
-	<bean id="goodsService" class="cn.itcast.shop.service.impl.GoodsServiceImpl" parent="baseService"/>
-	<bean id="fileUploadUtil" class="cn.itcast.shop.util.FileUploadUtil">
-			<property name="filePath" value="F:\javaweb2014 workspace\shop\WebRoot\image"></property>
-	</bean>
-	<bean id="shopTimerTask" class="cn.itcast.shop.util.ShopTimerTask">
-			<property name="categoryService" ref="categoryService"></property>
-			<property name="goodsService" ref="goodsService"></property>
-	</bean>
-	<bean id="sorderService" class="cn.itcast.shop.service.impl.SorderServiceImpl" parent="baseService"></bean>
-	<bean id="forderService" class="cn.itcast.shop.service.impl.ForderServiceImpl" parent="baseService"></bean>
-	<bean id="usersService" class="cn.itcast.shop.service.impl.UsersServiceImpl" parent="baseService"></bean>
-	<bean id="onlinePayService" class="cn.itcast.shop.service.impl.OnlinePayService" ></bean>
-	<!--  
-	<bean id="shopEmailUtil" class="cn.itcast.shop.util.ShopEmailUtil" />
-	-->
-	
-	</beans>
+	 <!-- 2 -->
+	 <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+	 	 <!-- 需要sessionFactory -->
+	 	 <property name="sessionFactory" ref="sessionFactory" />
+	 </bean>
+	 
+	 <!-- 3 -->
+	 <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	 	<property name="sessionFactory" ref="sessionFactory" />
+	 </bean>
+	 <!-- 
+	 	此类不能直接实例化,因为此类的构造方法要通过子类调用, 获取子类的相关信息
+	  -->
+	 <bean id="baseService" class="cn.itcast.shop.service.impl.BaseServiceImpl" lazy-init="true">
+	 	<property name="hibernateTemplate" ref="hibernateTemplate" />
+	 </bean>
+	 <!-- parent 在Spring配置文件中 找父类, 父类通过Spring的方式创建, 这样父类就可以实现依赖注入 -->
+	 <bean id="logsService" class="cn.itcast.shop.service.impl.LogsServiceImpl" parent="baseService" />
+	 <bean id="usersService" class="cn.itcast.shop.service.impl.UsersServiceImpl" parent="baseService" />
+	 <bean id="forderService" class="cn.itcast.shop.service.impl.ForderServiceImpl" parent="baseService" />
+	 <bean id="sorderService" class="cn.itcast.shop.service.impl.SorderServiceImpl" parent="baseService" />
+	 <bean id="accountService" class="cn.itcast.shop.service.impl.AccountServiceImpl" parent="baseService" />
+	 <bean id="categoryService" class="cn.itcast.shop.service.impl.CategoryServiceImpl" parent="baseService" />
+	 <bean id="goodsService" class="cn.itcast.shop.service.impl.GoodsServiceImpl" parent="baseService" />
+	 <bean id="roleService" class="cn.itcast.shop.service.impl.RoleServiceImpl" parent="baseService" />
+	 <bean id="privilegeService" class="cn.itcast.shop.service.impl.PrivilegeServiceImpl" parent="baseService" />
+	 <bean id="fileUploadUtil" class="cn.itcast.shop.util.FileUploadUtil">
+	 	<property name="filePath" value="D:\apache-tomcat-6.0.18\webapps\shop\image\" />
+	 </bean>
+	 <bean id="shopTimerTask" class="cn.itcast.shop.util.ShopTimerTask">
+	 	<property name="categoryService" ref="categoryService" />
+	 	<property name="goodsService" ref="goodsService" />
+	 </bean>
+	 <bean id="onlinePayService" class="cn.itcast.shop.service.impl.OnlinePayService" />
+	 <bean id="shopEmaiUtill" class="cn.itcast.shop.util.ShopEmaiUtill" />
+</beans>

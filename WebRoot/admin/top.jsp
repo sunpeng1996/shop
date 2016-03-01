@@ -21,6 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-     	后台管理系统
+     	商城后台管理系统 您好:${sessionScope.account.alogin} 
+     	如果不是本人请<a href="${pageContext.request.contextPath}/accountAction_exit.action" target="_parent">注销</a>  
   </body>
 </html>

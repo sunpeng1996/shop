@@ -19,11 +19,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
   </head>
-	<frameset rows="100,*" border="5">
-		<frame src="/shop/admin/top.jsp" />
-		<frameset cols="150,*">
-			<frame src="/shop/admin/left.jsp"/>
-			<frame src="/shop/admin/main.jsp" name="right"/>
+	<frameset rows="48,54%" border="5">
+		<frame src="${pageContext.request.contextPath}/admin/top.jsp" />
+		<frameset cols="200,*">
+			<frame src="${pageContext.request.contextPath}/admin/left2.jsp"/>
+			<frame src="${pageContext.request.contextPath}/admin/main.jsp" name="right"/>
 		</frameset>
 	</frameset>
 </html>

@@ -1,81 +1,82 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-	<!-- spring与Struts2整合的作用：spring来管理action，实现action与service的解耦
-			1.添加整合jar包，功能：替换默认创建action的工厂类org.apache.struts2.spring.StrutsSpringObjectFactory.class
-				此类创建action是从spring容器中的
-			2.添加监听器，需要spring-web.jar，监听器用来加载spring配置文件，并且把spring配置文件
-				存储到application内置对象中
-				默认会在web-inf/application.xml，如果要改变位置，要配置参数contextConfigLocation
-			3.	修改action的class属性，与spring中配置的action id 相同
-	 -->
-	<!-- 配置为开发模式,这样修改的Struts的配置文件,不需要重启容器,发布的时候设置为false 
-	     Struts的常量配置,都在struts-core-2.3.4jar org.apache.struts2: default.properties中
-	-->
+
 	<constant name="struts.devMode" value="true" />
-	<!-- 所有的包都必须继承struts-default,里面设置了拦截器,和缺省拦截器  
-		 在struts-core-2.3.4jar 包下面的struts-default.xml中有详细介绍
-	-->
+	<!-- struts-default 使用默认Struts拦截器 -->
 	<package name="shop" extends="json-default">
-	
-	<interceptors>
+		<interceptors>
 			<interceptor name="logsInterceptor" class="cn.itcast.shop.interceptor.LogsInterceptor" />
+			<interceptor name="checkPrivilegeInterceptor" class="cn.itcast.shop.interceptor.CheckPrivilegeInterceptor" />
 			<interceptor-stack name="defaultStack">
+				<!-- 权限验证第一个执行 -->
+				<interceptor-ref name="checkPrivilegeInterceptor" />
 				<interceptor-ref name="logsInterceptor">
 					<param name="includeMethods">save*,update*,delete*</param>
 				</interceptor-ref>
 				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
 		</interceptors>
-	
+
 		<global-results>
 			<result name="main">/admin/main.jsp</result>
-			<result name="login">login.jsp</result>
-			<result name="index">index.jsp</result>
+			<result name="aindex">/admin/index.jsp</result>
+			<result name="login">/login.jsp</result>
+			<result name="alogin">/alogin.jsp</result>
+			<result name="index">/index.jsp</result>
 			<result name="error">/error.jsp</result>
+			<result name="error2">/error.jsp</result>
 		</global-results>
-	
+
 		<global-exception-mappings>
-			<exception-mapping result="error" exception="java.lang.Exception"></exception-mapping>
+			<exception-mapping result="error" exception="java.lang.Exception" />
 		</global-exception-mappings>
-	
-		<!-- action配置在此处 -->
-			<action name="accountAction_*" class="accountAction" method="{1}">
-					<result name="queryAccount">/admin/account/queryAccount.jsp</result>
-					<result name="updateAccount">/admin/account/updateAccount.jsp</result>
-			</action>
-			<action name="categoryAction_*" class="categoryAction" method="{1}">
-					<result name="query">/admin/category/query.jsp</result>
-			</action>
-			
-			<action name="goodsAction_*" class="goodsAction" method="{1}">
-					<result name="query">/admin/goods/query.jsp</result>
-					<result name="update">/admin/goods/update.jsp</result>
-					<result name="detail">/detail.jsp</result>
-					<result name="search">/search.jsp</result>
-					<result name="json" type="json">
-						<param name="root">keyWords</param>
-					</result>
-			</action>
-			
-			<action name="sorderAction_*" method="{1}" class="sorderAction">
-					<result name="showCar" type="redirect">/showCar.jsp</result>
-					<result name="json1" type="json">
-							<param name="root">jsonMap</param>
-							<!-- root名字是死的，json数据源 -->
-					</result>
-			</action>
-			
-			<action name="forderAction_*" class="cn.itcast.action.ForderAction" method="{1}">
-				<result name="bank">/users/bank.jsp</result>
-			</action>
-			<action name="usersAction_*" class="cn.itcast.action.UsersAction" method="{1}">
-					<result name="goUrl">${goUrl}</result>
-			</action>
-			<action name="payAction_*" class="cn.itcast.action.PayAction" method="{1}">
-					<result name="reqpay">/users/reqpay.jsp</result>
-					<result name="payResult">/users/payResult.jsp</result>
-			</action>
+
+		<action name="accountAction_*" method="{1}" class="accountAction">
+			<result name="queryUI">/admin/account/query.jsp</result>
+			<result name="saveUI">/admin/account/save.jsp</result>
+			<result name="updateUI">/admin/account/update.jsp</result>
+		</action>
+		<action name="categoryAction_*" method="{1}" class="categoryAction">
+			<result name="queryUI">/admin/category/query.jsp</result>
+			<result name="saveUI">/admin/category/save.jsp</result>
+		</action>
+		<action name="goodsAction_*" method="{1}" class="goodsAction">
+			<result name="queryUI">/admin/goods/query.jsp</result>
+			<result name="saveUI">/admin/goods/save.jsp</result>
+			<result name="updateUI">/admin/goods/update.jsp</result>
+			<result name="detail">/detail.jsp</result>
+			<result name="search">/search.jsp</result>
+			<result name="json" type="json">
+				<param name="root">keyWords</param>
+			</result>
+		</action>
+		<action name="sorderAction_*" method="{1}" class="sorderAction">
+			<result name="showCar" type="redirect">/showCar.jsp</result>
+			<!--
+				<result name="demo" type="chain"> <param
+				name="actionName">forderAction_cluFtotal</param> </result>
+			-->
+			<result name="json1" type="json">
+				<!-- root 源码中指定的 json数据源 -->
+				<param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="forderAction_*" method="{1}" class="forderAction">
+			<result name="bank" type="redirect">/users/bank.jsp</result>
+		</action>
+		<action name="usersAction_*" method="{1}" class="usersAction">
+			<result name="aa">${goUrl}</result>
+		</action>
+		<action name="payAction_*" method="{1}" class="payAction">
+			<result name="reqpay">/users/reqpay.jsp</result>
+			<result name="payResult">/users/payResult.jsp</result>
+		</action>
+		<action name="roleAction_*" method="{1}" class="roleAction">
+			<result name="saveUI">/admin/role/save.jsp</result>
+			<result name="queryUI">/admin/role/query.jsp</result>
+			<result name="updateUI">/admin/role/update.jsp</result>
+		</action>
+
 	</package>
-		
 </struts>    

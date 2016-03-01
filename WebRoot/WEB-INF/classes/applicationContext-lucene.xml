@@ -5,7 +5,7 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	<bean id="configuration" class="cn.itcast.shop.lucene.Configuration" init-method="init">
-		<property name="dirPath" value="F:/javaweb Tomcat/apache-tomcat-7.0.42/webapps/shop/indexDir" />
+		<property name="dirPath" value="D:/apache-tomcat-6.0.18/webapps/shop/indexDir" />
 	</bean>
 	
 	<bean id="documentUtil" class="cn.itcast.shop.lucene.DocumentUtil" />

@@ -5,24 +5,26 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
-	
-	<bean id="baseAction" class="cn.itcast.action.BaseAction">
-			<property name="accountService" ref="accountService"></property>
-			<property name="goodsService" ref="goodsService"></property>
-			<property name="categoryService" ref="categoryService"></property>
-			<property name="fileUploadUtil" ref="fileUploadUtil"></property>
-			<property name="sorderService" ref="sorderService"></property>
-			<property name="forderService" ref="forderService"></property>
-			<property name="usersService" ref="usersService"></property>
-			<property name="onlinePayService" ref="onlinePayService"></property>
-			<!--  <property name="shopEmailUtil" ref="shopEmailUtil" />-->
-			<property name="luceneServiceImpl" ref="luceneServiceImpl"></property>
+	<bean id="baseAction" class="cn.itcast.shop.action.BaseAction" scope="prototype">
+		<property name="accountService" ref="accountService" />
+		<property name="categoryService" ref="categoryService" />
+		<property name="goodsService" ref="goodsService" />
+		<property name="fileUploadUtil" ref="fileUploadUtil" />
+		<property name="sorderService" ref="sorderService" />
+		<property name="forderService" ref="forderService" />
+		<property name="usersService" ref="usersService" />
+		<property name="onlinePayService" ref="onlinePayService" />
+		<property name="shopEmaiUtill" ref="shopEmaiUtill" />
+		<property name="luceneServiceImpl" ref="luceneServiceImpl" />
+		<property name="roleService" ref="roleService" />
+		<property name="privilegeService" ref="privilegeService" />
 	</bean>
-	
-	<bean id="accountAction" class="cn.itcast.action.AccountAction" scope="prototype" parent="baseAction"/>
-	<bean id="categoryAction" class="cn.itcast.action.CategoryAction" scope="prototype" parent="baseAction"></bean>
-	<bean id="goodsAction" class="cn.itcast.action.GoodsAction" scope="prototype" parent="baseAction"></bean>
-	<bean id="sorderAction" class="cn.itcast.action.SorderAction" scope="prototype" parent="baseAction"></bean>
-	<bean id="usersAction" class="cn.itcast.action.UsersAction" scope="prototype" parent="baseAction"></bean>
-	<bean  id="payAction" class="cn.itcast.action.PayAction" scope="prototype" parent="baseAction"></bean>
-	</beans>
+	<bean id="forderAction" class="cn.itcast.shop.action.ForderAction" parent="baseAction" scope="prototype" />
+	<bean id="accountAction" class="cn.itcast.shop.action.AccountAction" parent="baseAction" scope="prototype"  />
+	<bean id="categoryAction" class="cn.itcast.shop.action.CategoryAction" parent="baseAction" scope="prototype" />
+	<bean id="goodsAction" class="cn.itcast.shop.action.GoodsAction" parent="baseAction" scope="prototype" />
+	<bean id="sorderAction" class="cn.itcast.shop.action.SorderAction" parent="baseAction" scope="prototype" />
+	<bean id="usersAction" class="cn.itcast.shop.action.UsersAction" parent="baseAction" scope="prototype" />
+	<bean id="payAction" class="cn.itcast.shop.action.PayAction" parent="baseAction" scope="prototype" />
+	<bean id="roleAction" class="cn.itcast.shop.action.RoleAction" parent="baseAction" scope="prototype" />
+</beans>
